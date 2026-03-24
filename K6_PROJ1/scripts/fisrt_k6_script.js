@@ -6,12 +6,18 @@ const BASE_URL = __ENV.BASE_URL || 'https://test.k6.io';
 
 // adding virtual users and duration of the test
 export const options = {
-    vus : 3,
-    duration : '5s',
+    // vus : 3,
+    // duration : '5s',
+    
+    stages: [
+        {duration: '5s', target : 5}, // ramp up to 5 users over 5 seconds
+        {duration: '3s', target : 5}, // stay at 5 users for 3 seconds
+        {duration: '5s', target : 0}, // ramp down to 0 users over 5 seconds
+    ],
 
     // thresholds -> defines performance limits
     thresholds : {
-        http_req_duration : ['p(95)<200'], // 95% of the requests must finish under 500ms
+        http_req_duration : ['p(95)<500'], // 95% of the requests must finish under 500ms
     }
 
 };
