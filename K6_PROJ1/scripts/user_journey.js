@@ -51,4 +51,4 @@ export function handleSummary(data) {
         return {
             "userJourneyReport.html": htmlReport(data),
         }
-      } 
+      }
